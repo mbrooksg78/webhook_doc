@@ -1,0 +1,231 @@
+@charset "UTF-8"
+
+// Import
+
+@import variables
+@import layout
+@import mixin
+@import admonition
+@import heading
+@import py-domain
+
+*
+  margin: 0
+  padding: 0
+
+html
+  color: $font_color
+  font:
+    size: $font_size_base
+    weight: $font_weight_base
+    family: $font_family
+  background:
+    color: $background_color
+
+$a-tags: 'a, a:active, a:hover, a:visited'
+$a-tags-hover: 'a:active, a:hover'
+
+#{$a-tags}
+  text-decoration: none
+  color: rgb(3, 155, 229)
+
+  .footer &
+    color: #FFF9C4
+
+#{$a-tags-hover}
+  color: $accent_color
+  @include transition(color 0.4s ease-in)
+
+  .footer &
+    color: $accent_color
+
+.headerlink
+  font-size: 22px
+  margin-left: 5px
+
+#header
+  @include box-shadow
+  background-color: $primary_color
+  color: #FFF
+  padding: 10px $base_side_padding
+
+.related
+  padding: 20px $base_side_padding
+
+  ul
+    list-style: none
+
+.footer
+  background-color: $secondary_color
+  color: #fff
+  margin: 20px 0 0
+  padding: 25px $base_side_padding
+  text-align: center
+// @include box-shadow(0px, 500px, 0px, 500px rgba(0, 0, 0, 0.156863))
+
+.documentwrapper
+  margin-bottom: 20px
+
+  p, dd
+    line-height: $line_height
+    margin: 0.6rem 0
+
+  dl
+    margin: 0.3rem 1em
+
+  dt
+    font-weight: $font_weight_base + 300
+
+  dd
+    padding: 0 1em
+
+  em
+    color: $font_color_em
+    font-style: normal
+
+  strong
+    color: $font_color_em
+    font-weight: $font_weight_base + 300
+    font-style: normal
+
+  ul, ol
+    list-style-position: outside
+    line-height: $line_height
+    margin:
+      left: 1em
+      right: 1em
+
+
+    li
+      margin: 0.3rem 1em
+
+  code
+    font-family: $font_family_for_code !important
+    font-weight: 300
+
+table.docutils
+  border: solid 1px #F5F5F5
+  border-radius: $border-radius
+  border-collapse: collapse
+  width: 100%
+  text-align: center
+  @include box-shadow
+
+thead tr
+  border-width: 0
+
+tr
+  border: solid #E0E0E0
+  border-width: 1px 0 0 0
+
+td, th
+  padding: 10px 10px
+  border-width: 0
+
+// Source Code
+dl
+  &.class
+    padding-bottom: 10px
+
+  &.function, &.class, &.method, &.staticmethod
+    dt *
+      font-family: $font_family_for_code !important
+
+    i
+      font-family: "Material Icons", monospace !important
+
+    dd .field-body li
+      strong:first-of-type, em:first-of-type
+        font-family: $font_family_for_code !important
+        font-weight: 400
+
+.literal-block-wrapper
+  @include box-shadow
+  border-radius: $border-radius
+  padding: 0
+  margin: 15px 0
+  background-color: #E3F2FD !important
+  width: 100%
+
+  .highlight
+    @include box-shadow
+    padding: 15px 20px
+    margin: 0
+    border: none
+
+  .highlighttable
+    @include box-shadow
+    border: none
+    margin: 0
+    padding: 15px 20px
+
+    .highlight
+      padding: 0
+
+.highlight, .highlighttable
+  background-color: #E3F2FD !important
+  @include box-shadow
+  border-radius: $border-radius
+  padding: 15px 20px
+  margin: 15px 0
+
+  pre
+    font-family: $font_family_for_code !important
+    font-size: $font_size_base - 20% !important
+    font-weight: 300
+
+  .highlight
+    @include box-shadow
+    padding: 0
+    margin: 0
+    border: none
+
+.highlighttable
+  width: 100%
+
+  td.linenos, td.code
+    padding: 0
+    margin: 0
+
+caption
+  text-align: center
+  margin-bottom: 5px
+
+.code-block-caption
+  text-align: center
+  padding-top: 10px
+
+.sphinxsidebar
+
+
+  li
+    list-style-position: outside
+    margin: 0.5rem 1.5em
+
+.sphinxsidebarwrapper
+  margin-left: 20px
+
+.this-page-menu
+  margin-top: 1em
+
+#searchbox
+  max-width: 280px
+  margin: 40px 20px 0 8px
+  border-bottom: 1px solid $secondary_color
+  outline: 0
+  color: $secondary_color
+
+  &:hover
+    border-bottom: 1px solid $accent_color
+    color: $accent_color
+    @include transition(0.4s ease-in)
+
+  input
+    border: none
+    background: none
+    outline: 0
+    font-size: 100%
+
+i.material-icons
+  vertical-align: middle
+  margin-right: 4px
