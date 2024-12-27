@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Especificación Técnica &#8212; Soltein Webhook Odoo</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/soltein.css?v=5ff75ea5" />
+    <script src="../_static/documentation_options.js?v=e2bb6099"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=f85f4cfb"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Introducción" href="introduccion.html" />
+    <script type="text/javascript" src="../_static/pd.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  </head><body>
+    <div id="header">
+        <h1>Soltein Webhook Odoo</h1>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+        <ul>
+            <li class="nav-item nav-item-0"><a href="../index.html">Soltein Webhook Odoo</a> &#187;
+            </li>
+        </ul>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<section id="especificacion-tecnica">
+<h1>Especificación Técnica<a class="headerlink" href="#especificacion-tecnica" title="Link to this heading">¶</a></h1>
+<section id="endpoint">
+<h2>Endpoint<a class="headerlink" href="#endpoint" title="Link to this heading">¶</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>URL: https://&lt;servidor&gt;:&lt;puerto&gt;/sire/confirmation
+Método: POST
+Formato: JSON
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Todos los endpoints requieren autenticación mediante token JWT y firma HMAC.</p>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Cabeceras HTTP</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nombre</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>X-Odoo-Signature</p></td>
+<td><p>Firma HMAC-SHA256 del cuerpo de la solicitud</p></td>
+</tr>
+<tr class="row-odd"><td><p>Authorization</p></td>
+<td><p>Bearer Token JWT proporcionado por Odoo</p></td>
+</tr>
+<tr class="row-even"><td><p>Content-Type</p></td>
+<td><p>«application/json»</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>La firma se genera utilizando el token de autenticación como clave secreta</p>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<section id="estructura-de-la-solicitud">
+<h3>Estructura de la Solicitud<a class="headerlink" href="#estructura-de-la-solicitud" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;move_ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="respuestas">
+<h3>Respuestas<a class="headerlink" href="#respuestas" title="Link to this heading">¶</a></h3>
+<section id="respuesta-exitosa-200-ok">
+<h4>Respuesta Exitosa (200 OK)<a class="headerlink" href="#respuesta-exitosa-200-ok" title="Link to this heading">¶</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Requerimiento procesado correctamente&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;move_ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;processed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;timestamp&gt;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="respuestas-de-error">
+<h4>Respuestas de Error<a class="headerlink" href="#respuestas-de-error" title="Link to this heading">¶</a></h4>
+<section id="unauthorized">
+<h5>401 Unauthorized<a class="headerlink" href="#unauthorized" title="Link to this heading">¶</a></h5>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error de autenticación&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Token inválido o expirado&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="not-found">
+<h5>404 Not Found<a class="headerlink" href="#not-found" title="Link to this heading">¶</a></h5>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Requerimiento no encontrado&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;El ID de requerimiento especificado no existe&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="internal-server-error">
+<h5>500 Internal Server Error<a class="headerlink" href="#internal-server-error" title="Link to this heading">¶</a></h5>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Requerimiento procesado&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;El requerimiento ya h sido procesado&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logosol.png" alt="Logo of Servicio Webhook Odoo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Tabla de contenido</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Especificación Técnica</a><ul>
+<li><a class="reference internal" href="#endpoint">Endpoint</a><ul>
+<li><a class="reference internal" href="#estructura-de-la-solicitud">Estructura de la Solicitud</a></li>
+<li><a class="reference internal" href="#respuestas">Respuestas</a><ul>
+<li><a class="reference internal" href="#respuesta-exitosa-200-ok">Respuesta Exitosa (200 OK)</a></li>
+<li><a class="reference internal" href="#respuestas-de-error">Respuestas de Error</a><ul>
+<li><a class="reference internal" href="#unauthorized">401 Unauthorized</a></li>
+<li><a class="reference internal" href="#not-found">404 Not Found</a></li>
+<li><a class="reference internal" href="#internal-server-error">500 Internal Server Error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Tema anterior</h4>
+    <p class="topless"><a href="introduccion.html"
+                          title="capítulo anterior">Introducción</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/doc/especificacion_tecnica.rst.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Soltein S.A..
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
